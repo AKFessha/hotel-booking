@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import "./App.css";
 import Customers from "./components/Customers.js";
+import Footer from "./components/Footer";
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
         </header>
         <div>
           <Customers />
+          <Footer />
         </div>
       </div>
     );
