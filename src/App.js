@@ -13,7 +13,9 @@ class App extends Component {
           <h1 className="App-title">Hotel Booking</h1>
         </header>
         <div>
+          <h2> Customers List</h2>
           <Customers />
+          <h2> Reservations List</h2>
           <Reservations />
           <Footer />
         </div>
