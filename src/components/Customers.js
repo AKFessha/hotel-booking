@@ -17,32 +17,35 @@ class Customers extends Component {
   }
   render() {
     return (
-      <table className="results">
-        <thead>
-          <tr>
-            <th>Id </th>
-            <th>Title </th>
-            <th> Firstname</th>
-            <th>Surname </th>
-            <th>Email </th>
-          </tr>
-        </thead>
-        {this.state.results.map(result => (
-          <tbody>
+      <div>
+        <h2>Customer List </h2>
+        <table className="results">
+          <thead>
             <tr>
-              <td>{result.id} </td>
-
-              <td>{result.title} </td>
-
-              <td>{result.firstname} </td>
-
-              <td>{result.surname} </td>
-
-              <td>{result.email}</td>
+              <th>Id </th>
+              <th>Title </th>
+              <th> Firstname</th>
+              <th>Surname </th>
+              <th>Email </th>
             </tr>
-          </tbody>
-        ))}
-      </table>
+          </thead>
+          {this.state.results.map(result => (
+            <tbody>
+              <tr>
+                <td>{result.id} </td>
+
+                <td>{result.title} </td>
+
+                <td>{result.firstname} </td>
+
+                <td>{result.surname} </td>
+
+                <td>{result.email}</td>
+              </tr>
+            </tbody>
+          ))}
+        </table>
+      </div>
     );
   }
 }
