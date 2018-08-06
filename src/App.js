@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Customers from "./components/Customers.js";
 import Reservations from "./components/Reservations";
+import Reviews from "./components/Reviews";
 import Footer from "./components/Footer";
 
 class App extends Component {
@@ -17,6 +18,8 @@ class App extends Component {
           <Customers />
           <h2> Reservations List</h2>
           <Reservations />
+          <Reviews />
+
           <Footer />
         </div>
       </div>
