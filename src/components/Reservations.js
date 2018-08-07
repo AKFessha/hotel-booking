@@ -19,6 +19,9 @@ class Reservations extends React.Component {
     return (
       <div>
         <h2>Reservations List </h2>
+        <label> Search by Id </label>
+        <input />
+        <button>Search </button>
         <table className="results">
           <thead>
             <tr>

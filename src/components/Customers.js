@@ -19,6 +19,9 @@ class Customers extends Component {
     return (
       <div>
         <h2>Customer List </h2>
+        <label> Search by name </label>
+        <input />
+        <button>Search </button>
         <table className="results">
           <thead>
             <tr>
