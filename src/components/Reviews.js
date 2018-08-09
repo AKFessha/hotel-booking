@@ -17,8 +17,7 @@ class Reviews extends React.Component {
     return (
       <div>
         <h2> Reviews table </h2>
-        <label> Search by room type Id </label>
-        <input />
+        <input placeholder="search by room type id " />
         <button>Search </button>
         <table>
           <thead>
