@@ -25,7 +25,7 @@ tr:hover {
   background-color: #f5f5f5;
 }
 .footer {
-  margin: 15px 2px;
+  margin: 20px 2px;
   text-align: center;
   text-decoration-style: double;
   background-color: #24292e;
@@ -36,8 +36,4 @@ tr:hover {
 
 .App-title {
   font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
 }
