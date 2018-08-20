@@ -6,19 +6,35 @@ class Reviews extends React.Component {
       reviews: []
     };
   }
+  onChange = e => {
+    let change = {};
+    change[e.target.name] = e.target.value;
+    this.setState(change);
+  };
+
   componentDidMount() {
     fetch("http://localhost:8080/api/reviews/")
       .then(data => data.json())
       .then(data => {
         this.setState({ reviews: data });
       });
+    onSubmit = e => {
+      e.preventDefault;
+      this.state.reviews.filter(review => {
+        review.id === id.change;
+      });
+    };
   }
   render() {
     return (
       <div>
         <h2> Reviews table </h2>
-        <input placeholder="search by room type id " />
-        <button>Search </button>
+        <input
+          placeholder="search by room type id "
+          name="id"
+          onChange={this.onChange}
+        />
+        <button onClick={this.onSubmit}>Search </button>
         <table>
           <thead>
             <tr>
