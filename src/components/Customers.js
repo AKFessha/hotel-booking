@@ -3,7 +3,8 @@ class Customers extends Component {
   constructor() {
     super();
     this.state = {
-      results: []
+      results: [],
+      search: ""
     };
   }
   componentDidMount() {
@@ -15,12 +16,23 @@ class Customers extends Component {
         });
       });
   }
+  onChange = e => {
+    const searchValue = e.target.value;
+    this.setState({ search: searchValue });
+  };
   render() {
+    let filteredCustomers = this.state.results.filter(result => {
+      return (
+        result.firstname
+          .toLowerCase()
+          .includes(this.state.search.toLowerCase()) ||
+        result.surname.toLowerCase().includes(this.state.search.toLowerCase())
+      );
+    });
     return (
       <div>
         <h2>Customer List </h2>
-        <input placeholder="search by name" />
-        <button>Search </button>
+        <input placeholder="search by name" onChange={this.onChange} />
         <table className="results">
           <thead>
             <tr>
@@ -31,7 +43,7 @@ class Customers extends Component {
               <th>Email </th>
             </tr>
           </thead>
-          {this.state.results.map(result => (
+          {filteredCustomers.map(result => (
             <tbody>
               <tr>
                 <td>{result.id} </td>
