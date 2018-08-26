@@ -3,7 +3,8 @@ class Reservations extends React.Component {
   constructor() {
     super();
     this.state = {
-      results: []
+      results: [],
+      search: ""
     };
   }
   componentDidMount() {
@@ -15,12 +16,21 @@ class Reservations extends React.Component {
         });
       });
   }
+  onChange = e => {
+    const searchValue = e.target.value;
+    this.setState({
+      search: searchValue
+    });
+    console.log(this.state.search.type);
+  };
   render() {
+    let filteredReservations = this.state.results.filter(result => {
+      return result.room_id === this.state.search;
+    });
     return (
       <div>
         <h2>Reservations List </h2>
-        <input placeholder="search by id" />
-        <button>Search </button>
+        <input placeholder="search by id" onChange={this.onChange} />
         <table className="results">
           <thead>
             <tr>
@@ -32,7 +42,7 @@ class Reservations extends React.Component {
               <th>Room Price</th>
             </tr>
           </thead>
-          {this.state.results.map(result => (
+          {filteredReservations.map(result => (
             <tbody>
               <tr>
                 <td>{result.id} </td>
