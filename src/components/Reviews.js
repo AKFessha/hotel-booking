@@ -3,7 +3,8 @@ class Reviews extends React.Component {
   constructor() {
     super();
     this.state = {
-      reviews: []
+      reviews: [],
+      search: ""
     };
   }
 
@@ -15,22 +16,23 @@ class Reviews extends React.Component {
       });
   }
   onChange = e => {
-    const searchId = e.target.value;
-    const filteredReviews = this.state.reviews.filter(review => {
-      review.id === searchId;
-    });
-    this.setState({
-      reviews: filteredReviews
-    });
+    const searchValue = e.target.value;
 
-    console.log(searchId);
+    this.setState({
+      search: searchValue
+    });
   };
+
   render() {
+    let filteredReviews = this.state.reviews.filter(review => {
+      return review.comment
+        .toLowerCase()
+        .includes(this.state.search.toLowerCase());
+    });
     return (
       <div>
         <h2> Reviews table </h2>
-        <input placeholder="search by room type id " onChange={this.onChange} />
-        <button>Search </button>
+        <input placeholder="search by comment " onChange={this.onChange} />
         <table>
           <thead>
             <tr>
@@ -42,7 +44,7 @@ class Reviews extends React.Component {
               <th>Review data </th>
             </tr>
           </thead>
-          {this.state.reviews.map(result => (
+          {filteredReviews.map(result => (
             <tbody>
               <tr>
                 <td> {result.id}</td>
