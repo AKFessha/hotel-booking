@@ -4,7 +4,7 @@ class Reservations extends React.Component {
     super();
     this.state = {
       results: [],
-      search: ""
+      filteredReservations: []
     };
   }
   componentDidMount() {
@@ -12,25 +12,35 @@ class Reservations extends React.Component {
       .then(data => data.json())
       .then(data => {
         this.setState({
-          results: data
+          results: data,
+          filteredReservations: data
         });
       });
   }
   onChange = e => {
-    const searchValue = e.target.value;
-    this.setState({
-      search: searchValue
-    });
-    console.log(this.state.search.type);
+    const searchValue = e.target.valueAsNumber;
+
+    this.filterReserv(searchValue);
   };
-  render() {
-    let filteredReservations = this.state.results.filter(result => {
-      return result.room_id === this.state.search;
+
+  filterReserv(searchValue) {
+    const filteredOutput = this.state.results.filter(result => {
+      return result.room_id === searchValue || isNaN(searchValue);
     });
+    this.setState({
+      filteredReservations: filteredOutput
+    });
+  }
+
+  render() {
     return (
       <div>
         <h2>Reservations List </h2>
-        <input placeholder="search by id" onChange={this.onChange} />
+        <input
+          placeholder="search by id"
+          type="number"
+          onChange={this.onChange}
+        />
         <table className="results">
           <thead>
             <tr>
@@ -42,7 +52,7 @@ class Reservations extends React.Component {
               <th>Room Price</th>
             </tr>
           </thead>
-          {filteredReservations.map(result => (
+          {this.state.filteredReservations.map(result => (
             <tbody>
               <tr>
                 <td>{result.id} </td>
