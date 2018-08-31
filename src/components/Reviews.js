@@ -4,7 +4,7 @@ class Reviews extends React.Component {
     super();
     this.state = {
       reviews: [],
-      search: ""
+      filterResult: []
     };
   }
 
@@ -12,23 +12,22 @@ class Reviews extends React.Component {
     fetch("http://localhost:8080/api/reviews/")
       .then(data => data.json())
       .then(data => {
-        this.setState({ reviews: data });
+        this.setState({ reviews: data, filterResult: data });
       });
   }
   onChange = e => {
     const searchValue = e.target.value;
-
-    this.setState({
-      search: searchValue
-    });
+    this.filteredReviews(searchValue);
   };
-
-  render() {
-    let filteredReviews = this.state.reviews.filter(review => {
-      return review.comment
-        .toLowerCase()
-        .includes(this.state.search.toLowerCase());
+  filteredReviews(searchValue) {
+    const filteredOutput = this.state.reviews.filter(review => {
+      return review.comment.toLowerCase().includes(searchValue.toLowerCase());
     });
+    this.setState({
+      filterResult: filteredOutput
+    });
+  }
+  render() {
     return (
       <div>
         <h2> Reviews table </h2>
@@ -44,7 +43,7 @@ class Reviews extends React.Component {
               <th>Review data </th>
             </tr>
           </thead>
-          {filteredReviews.map(result => (
+          {this.state.filterResult.map(result => (
             <tbody>
               <tr>
                 <td> {result.id}</td>
