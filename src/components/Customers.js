@@ -4,7 +4,7 @@ class Customers extends Component {
     super();
     this.state = {
       results: [],
-      search: ""
+      filteredResults: []
     };
   }
   componentDidMount() {
@@ -12,23 +12,27 @@ class Customers extends Component {
       .then(data => data.json())
       .then(data => {
         this.setState({
-          results: data
+          results: data,
+          filteredResults: data
         });
       });
   }
   onChange = e => {
     const searchValue = e.target.value;
-    this.setState({ search: searchValue });
+    this.filteredCustomers(searchValue);
   };
-  render() {
-    let filteredCustomers = this.state.results.filter(result => {
+  filteredCustomers(searchValue) {
+    const filteredOutput = this.state.results.filter(result => {
       return (
-        result.firstname
-          .toLowerCase()
-          .includes(this.state.search.toLowerCase()) ||
-        result.surname.toLowerCase().includes(this.state.search.toLowerCase())
+        result.firstname.toLowerCase().includes(searchValue.toLowerCase()) ||
+        result.surname.toLowerCase().includes(searchValue.toLowerCase())
       );
     });
+    this.setState({
+      filteredResults: filteredOutput
+    });
+  }
+  render() {
     return (
       <div>
         <h2>Customer List </h2>
@@ -43,7 +47,7 @@ class Customers extends Component {
               <th>Email </th>
             </tr>
           </thead>
-          {filteredCustomers.map(result => (
+          {this.state.filteredResults.map(result => (
             <tbody>
               <tr>
                 <td>{result.id} </td>
