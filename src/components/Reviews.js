@@ -17,16 +17,13 @@ class Reviews extends React.Component {
   }
   onChange = e => {
     const searchValue = e.target.value;
-    this.filteredReviews(searchValue);
-  };
-  filteredReviews(searchValue) {
     const filteredOutput = this.state.reviews.filter(review => {
       return review.comment.toLowerCase().includes(searchValue.toLowerCase());
     });
     this.setState({
       filterResult: filteredOutput
     });
-  }
+  };
   render() {
     return (
       <div>
