@@ -4,9 +4,15 @@ class Customers extends Component {
     super();
     this.state = {
       results: [],
-      filteredResults: []
+      filteredResults: [],
+      show: true
     };
+    this.toogleTable = this.toogleTable.bind(this);
   }
+  toogleTable = () => {
+    const { show } = this.state;
+    this.setState({ show: !show });
+  };
   componentDidMount() {
     fetch("http://localhost:8080/api/customers/")
       .then(data => data.json())
@@ -35,6 +41,8 @@ class Customers extends Component {
       <div>
         <h2>Customer List </h2>
         <input placeholder="search by name" onChange={this.onChange} />
+        <br /> <br />
+        <button onClick={this.toogleTable}> Toggle Table</button>
         <table className="results">
           <thead>
             <tr>
@@ -45,21 +53,22 @@ class Customers extends Component {
               <th>Email </th>
             </tr>
           </thead>
-          {this.state.filteredResults.map(result => (
-            <tbody>
-              <tr>
-                <td>{result.id} </td>
+          {this.state.show &&
+            this.state.filteredResults.map(result => (
+              <tbody>
+                <tr>
+                  <td>{result.id} </td>
 
-                <td>{result.title} </td>
+                  <td>{result.title} </td>
 
-                <td>{result.firstname} </td>
+                  <td>{result.firstname} </td>
 
-                <td>{result.surname} </td>
+                  <td>{result.surname} </td>
 
-                <td>{result.email}</td>
-              </tr>
-            </tbody>
-          ))}
+                  <td>{result.email}</td>
+                </tr>
+              </tbody>
+            ))}
         </table>
       </div>
     );
