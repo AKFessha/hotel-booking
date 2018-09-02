@@ -19,9 +19,6 @@ class Customers extends Component {
   }
   onChange = e => {
     const searchValue = e.target.value;
-    this.filteredCustomers(searchValue);
-  };
-  filteredCustomers(searchValue) {
     const filteredOutput = this.state.results.filter(result => {
       return (
         result.firstname.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -31,7 +28,8 @@ class Customers extends Component {
     this.setState({
       filteredResults: filteredOutput
     });
-  }
+  };
+
   render() {
     return (
       <div>
