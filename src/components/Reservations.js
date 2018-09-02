@@ -19,25 +19,18 @@ class Reservations extends React.Component {
   }
   onChange = e => {
     const searchValue = e.target.valueAsNumber;
-
-    this.filterReserv(searchValue);
-  };
-
-  filterReserv(searchValue) {
     const filteredOutput = this.state.results.filter(result => {
       return result.room_id === searchValue || isNaN(searchValue);
     });
-    this.setState({
-      filteredReservations: filteredOutput
-    });
-  }
+    this.setState({ filteredReservations: filteredOutput });
+  };
 
   render() {
     return (
       <div>
         <h2>Reservations List </h2>
         <input
-          placeholder="search by id"
+          placeholder="search by room id"
           type="number"
           onChange={this.onChange}
         />
