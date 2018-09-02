@@ -4,10 +4,17 @@ class Reviews extends React.Component {
     super();
     this.state = {
       reviews: [],
-      filterResult: []
+      filterResult: [],
+      show: true
     };
+    this.toggleTable = this.toggleTable.bind(this);
   }
-
+  toggleTable = () => {
+    const { show } = this.state;
+    this.setState({
+      show: !show
+    });
+  };
   componentDidMount() {
     fetch("http://localhost:8080/api/reviews/")
       .then(data => data.json())
@@ -29,6 +36,8 @@ class Reviews extends React.Component {
       <div>
         <h2> Reviews table </h2>
         <input placeholder="search by comment " onChange={this.onChange} />
+        <br /> <br />
+        <button onClick={this.toggleTable}> Toggle Table</button>
         <table>
           <thead>
             <tr>
@@ -40,18 +49,19 @@ class Reviews extends React.Component {
               <th>Review data </th>
             </tr>
           </thead>
-          {this.state.filterResult.map(result => (
-            <tbody>
-              <tr>
-                <td> {result.id}</td>
-                <td>{result.customer_id} </td>
-                <td>{result.room_type_id} </td>
-                <td>{result.rating} </td>
-                <th>{result.comment} </th>
-                <td>{result.review_date} </td>
-              </tr>
-            </tbody>
-          ))}
+          {this.state.show &&
+            this.state.filterResult.map(result => (
+              <tbody>
+                <tr>
+                  <td> {result.id}</td>
+                  <td>{result.customer_id} </td>
+                  <td>{result.room_type_id} </td>
+                  <td>{result.rating} </td>
+                  <th>{result.comment} </th>
+                  <td>{result.review_date} </td>
+                </tr>
+              </tbody>
+            ))}
         </table>
       </div>
     );
