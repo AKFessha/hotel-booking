@@ -1,0 +1,11 @@
+input {
+  height: 25px;
+  width: 250px;
+  font-size: 16px;
+  background-color: rgb(245, 212, 228);
+}
+button {
+  background-color: lightblue;
+  width: 100px;
+  height: 30px;
+}
