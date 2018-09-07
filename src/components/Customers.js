@@ -40,7 +40,7 @@ class Customers extends Component {
   render() {
     return (
       <div>
-        <h2>Customer List </h2>
+        <h3>Customer List </h3>
         <input placeholder="search by name" onChange={this.onChange} />
         <br /> <br />
         <button onClick={this.toogleTable}> Toggle Table</button>
