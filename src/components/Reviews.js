@@ -35,7 +35,7 @@ class Reviews extends React.Component {
   render() {
     return (
       <div>
-        <h2> Reviews table </h2>
+        <h3> Reviews List </h3>
         <input placeholder="search by comment " onChange={this.onChange} />
         <br /> <br />
         <button onClick={this.toggleTable}> Toggle Table</button>
