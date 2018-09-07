@@ -36,7 +36,7 @@ class Reservations extends React.Component {
   render() {
     return (
       <div>
-        <h2>Reservations List </h2>
+        <h3>Reservations List </h3>
         <input
           placeholder="search by room id"
           type="number"
